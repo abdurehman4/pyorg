@@ -13,6 +13,8 @@ ArchLinux:
 It is already available for **ArchLinux** in **AUR**.
 And it is also available as **PKGBUILD** in github releases.
 
+[releases]: https://github.com/abdurehman4/fsorter/releases/tag/v1.0.1-1 'releases'
+
 Other Linux Distros:
-Download the *fsorter1.0.1-1-linux.zip* file from [releases] https://github.com/abdurehman4/fsorter/releases/tag/v1.0.1-1 'releases' and extract then run:
+Download the *fsorter1.0.1-1-linux.zip* file from [releases] and extract then run:
 ``./install.sh``
