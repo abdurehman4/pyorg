@@ -1,2 +1,2 @@
 # fsorter
-A folder organizer written in Python.
+A **CLI** folder organizer written in Python.
