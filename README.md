@@ -3,6 +3,7 @@
 A **CLI** folder organizer written in Python.
 # Dependencies
 Before installing, install the following dependencies:
+
 Ubuntu/Debain Based:
 
 ```sudo apt install python3 python3-termcolor```
