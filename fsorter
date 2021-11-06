@@ -115,7 +115,7 @@ def main_work():
 
     if len(files) == 0:
         cprint("There is nothing to do!",'red')
-        # exit()
+        exit()
 
 
     # Adding Files to list
