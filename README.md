@@ -1,5 +1,5 @@
 [releases]: https://github.com/abdurehman4/fsorter/releases/tag/v1.0.5-1 'releases'
-# Fsorter
+# PyOrg 
 # Introduction
 A **CLI** folder organizer written in Python.
 # Dependencies

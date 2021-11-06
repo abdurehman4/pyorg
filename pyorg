@@ -1,0 +1,167 @@
+#! /usr/bin/python3
+# For dealing with files
+import os
+from termcolor import cprint,colored
+import argparse
+
+
+# About
+# Maintainer Abdur Rehman Imran <arehmanimran4@gmail.com>
+name = 'PyOrg'
+version = "1.0.0-1"
+info = "GPL "+name+', version '+version
+
+# Folder Path
+dir_to_work = "./"
+
+# Yes or not
+yesno = str()
+
+
+# Command Line Arguments
+parser = argparse.ArgumentParser(prog=name,usage='%(prog)s [options]')
+parser.add_argument("-c","--dir",help="Change the directory")
+parser.add_argument("-v",'--version',action='version',version=info, help="Display the version")
+args = parser.parse_args()
+dir_to_work = args.dir
+
+if dir_to_work==None:
+    dir_to_work='./'
+
+
+# List of files and folders in current directory
+folders_and_files = os.listdir(dir_to_work)
+
+# Extensions Lists
+files = []
+pics_ext = ['.png','.jpg','.jpeg','.webp','.svg']
+video_ext = ['.mpv','.mp4','.avi']
+audio_ext = ['.mp3']
+docs_ext = ['.doc','.docx','.pdf','.txt','.xls','.xlsx','.ppt','.pptx']
+programming_ext = ['.c','.cpp','.py','.js','.java','.dart']
+compressed_ext = ['.zip','.7z','.tar']
+
+
+
+# Files Lists
+compressed = []
+pics = []
+videos = []
+audios = []
+docs = []
+programming = []
+others = []
+
+
+
+
+# Files and their Folder
+
+files_folder = [
+    [pics,"Pictures"],
+    [videos,"Videos"],
+    [audios,"Audios"],
+    [docs,"Documents"],
+    [programming,"Programming"],
+    [compressed,"Compressed"],
+    [others,"Others"]
+]
+
+
+# Functions
+def createFolderIfNotExists(folder_name):
+    if not os.path.exists(os.path.join(dir_to_work,folder_name)):
+        os.mkdir(os.path.join(dir_to_work,folder_name))
+
+
+def extCheckAndAppend(file,exts,list_to_append):
+    for ext in exts:
+        if ext in file:
+            list_to_append.append(file)
+        else : pass
+
+
+
+def otherFilesAppend(file):
+    if  (file not in pics) and (file not in videos) and (file not in audios) and (file not in docs) and (file not in programming) and (file not in compressed):
+        others.append(file)
+
+
+
+
+def moveAllFilesToFolder(files,folder):
+    for file in files:
+        if " " in file:
+            file.replace(' ','\ ')
+        else:pass
+        file_path = os.path.join(dir_to_work,file)
+        if ' ' in file_path:
+            file_path.replace(' ','\ ')
+        else:pass
+        os.rename(os.path.join(dir_to_work,file),os.path.join(dir_to_work,folder,file))
+        files.remove(file)
+
+
+def runFuncIfNotEmpty(files,folder):
+    if len(files) != 0:
+        createFolderIfNotExists(folder)
+        moveAllFilesToFolder(files,folder)
+def main_work(): 
+    # Adding only files to the files list
+    for file_or_folder in folders_and_files:
+        if os.path.isfile(os.path.join(str(dir_to_work),str(file_or_folder))):
+            files.append(file_or_folder)
+        else : pass
+
+
+    if len(files) == 0:
+        cprint("There is nothing to do!",'red')
+        exit()
+
+
+    # Adding Files to list
+    for file in files:
+        extCheckAndAppend(file,pics_ext,pics)
+        extCheckAndAppend(file,video_ext,videos)
+        extCheckAndAppend(file,audio_ext,audios)
+        extCheckAndAppend(file,docs_ext,docs)
+        extCheckAndAppend(file,programming_ext,programming)
+        extCheckAndAppend(file,compressed_ext,compressed)
+        otherFilesAppend(file)
+
+
+# Moving files and creating folders
+def organize():
+    for file_folder in files_folder:
+        runFuncIfNotEmpty(file_folder[0],file_folder[1])
+
+
+def print_info():
+    # Prints the information
+    current_dir = colored("Current Dir: ",'green') + colored(dir_to_work,'blue')
+    print(current_dir)
+    files_info = colored("Number of Files: ",'green') + colored(str(len(files)),'blue')
+
+    print (files_info)
+
+    cprint("Files:\n",'cyan')
+    cprint(files,'cyan')
+    cprint("\n",'cyan')
+
+
+    for file_folder in files_folder:
+        cprint (file_folder[1],'cyan')
+        cprint (file_folder[0],'cyan')
+def choice():
+    yesno = str(input("Organize ? [Y/n] :")).lower()
+
+    if yesno == "y":
+        organize()
+        print("Successfully Organized!")
+    else :
+        cprint("Aborted\n" , 'red')
+
+
+main_work()
+print_info()
+choice()
