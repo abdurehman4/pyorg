@@ -25,7 +25,8 @@ parser.add_argument("-v",'--version',action='version',version=info, help="Displa
 args = parser.parse_args()
 dir_to_work = args.dir
 
-
+if dir_to_work==None:
+    dir_to_work='./'
 
 
 # List of files and folders in current directory
@@ -108,7 +109,7 @@ def runFuncIfNotEmpty(files,folder):
 def main_work(): 
     # Adding only files to the files list
     for file_or_folder in folders_and_files:
-        if os.path.isfile(os.path.join(dir_to_work,file_or_folder)):
+        if os.path.isfile(os.path.join(str(dir_to_work),str(file_or_folder))):
             files.append(file_or_folder)
         else : pass
 
