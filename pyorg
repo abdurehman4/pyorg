@@ -92,13 +92,17 @@ def otherFilesAppend(file):
 def moveAllFilesToFolder(files,folder):
     for file in files:
         if " " in file:
-            file.replace(' ','\ ')
+            file.replace(' ','\\ ')
         else:pass
         file_path = os.path.join(dir_to_work,file)
         if ' ' in file_path:
-            file_path.replace(' ','\ ')
+            file_path.replace(' ','\\ ')
         else:pass
         os.rename(os.path.join(dir_to_work,file),os.path.join(dir_to_work,folder,file))
+        while os.path.exists(os.path.join(dir_to_work,file)):
+            try :
+                os.rename(os.path.join(dir_to_work,file),os.path.join(dir_to_work,folder,file))
+            except: print ("\n Error!!!")
         files.remove(file)
 
 
