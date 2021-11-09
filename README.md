@@ -1,4 +1,4 @@
-[releases]: https://github.com/abdurehman4/pyorg/releases/tag/v1.0.0-1 'releases'
+[releases]: https://github.com/abdurehman4/pyorg/releases/tag/v1.0.0-2 'releases'
 # PyOrg 
 # Introduction
 A **CLI** folder organizer written in Python.
